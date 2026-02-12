@@ -11,37 +11,42 @@ export function Navigation() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // ✅ Klik na logo: vždycky přejde na homepage a posune nahoru (bez 404 a bez potřeby reloadu)
+  // ✅ Logo: vždy přejde nahoru (bez reloadu)
   const goHome = () => {
-    // přepni na root hash route
-    window.location.hash = '#/';
+    if (location.pathname === '/') {
+      // Jsme už na homepage → jen scroll nahoru
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      // Nejsme na homepage → přejdi na root hash route
+      window.location.hash = '#/';
 
-    // scroll nahoru
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+      // Počkej na render a scrollni
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 50);
+    }
 
     setIsMobileMenuOpen(false);
   };
 
+  // ✅ Scroll na sekce homepage
   const scrollToSection = (sectionId: string) => {
-    // Jsme na homepage (v hash routeru je to pořád pathname "/")
     if (location.pathname === '/') {
       const element = document.getElementById(sectionId);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       } else {
-        // fallback (kdyby element ještě nebyl v DOMu)
         window.location.hash = `#/?section=${encodeURIComponent(sectionId)}`;
       }
-      setIsMobileMenuOpen(false);
-      return;
+    } else {
+      window.location.href = `${import.meta.env.BASE_URL}#/?section=${encodeURIComponent(sectionId)}`;
     }
 
-    // Nejsme na homepage (např. /aktuality) -> přejdi na root hash route + předdej sekci parametrem
-    window.location.href = `${import.meta.env.BASE_URL}#/?section=${encodeURIComponent(sectionId)}`;
     setIsMobileMenuOpen(false);
   };
 
@@ -55,7 +60,8 @@ export function Navigation() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          {/* ✅ místo Linku používáme button -> když jsi už doma, Link nic neudělá; button vždy provede "goHome" */}
+
+          {/* LOGO */}
           <button
             type="button"
             onClick={goHome}
@@ -76,7 +82,7 @@ export function Navigation() {
             </div>
           </button>
 
-          {/* Desktop Menu */}
+          {/* DESKTOP MENU */}
           <div className="hidden md:flex items-center space-x-8">
             <button
               onClick={() => scrollToSection('home')}
@@ -85,7 +91,10 @@ export function Navigation() {
               Domů
             </button>
 
-            <Link to="/aktuality" className="text-slate-700 hover:text-slate-900 transition-colors">
+            <Link
+              to="/aktuality"
+              className="text-slate-700 hover:text-slate-900 transition-colors"
+            >
               Aktuality
             </Link>
 
@@ -118,7 +127,7 @@ export function Navigation() {
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* MOBILE MENU BUTTON */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2 text-slate-700"
@@ -127,10 +136,11 @@ export function Navigation() {
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* MOBILE MENU */}
         {isMobileMenuOpen && (
           <div className="md:hidden py-4 bg-white border-t border-slate-200">
             <div className="flex flex-col space-y-4">
+
               <button
                 onClick={() => scrollToSection('home')}
                 className="text-left px-4 py-2 text-slate-700 hover:bg-slate-50 transition-colors"
@@ -173,6 +183,7 @@ export function Navigation() {
               >
                 Kontakt
               </button>
+
             </div>
           </div>
         )}
