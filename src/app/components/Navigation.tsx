@@ -16,15 +16,21 @@ export function Navigation() {
   }, []);
 
   const scrollToSection = (sectionId: string) => {
-    if (location.pathname !== '/') {
-      // Přesměrování na homepage + anchor (funguje i na GitHub Pages)
-      window.location.href = `${import.meta.env.BASE_URL}#${sectionId}`;
-    } else {
+    // Jsme na homepage (v hash routeru je to pořád pathname "/")
+    if (location.pathname === '/') {
       const element = document.getElementById(sectionId);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        // fallback (kdyby element ještě nebyl v DOMu)
+        window.location.hash = `#/?section=${encodeURIComponent(sectionId)}`;
       }
+      setIsMobileMenuOpen(false);
+      return;
     }
+
+    // Nejsme na homepage (např. /aktuality) -> přejdi na root hash route + předdej sekci parametrem
+    window.location.href = `${import.meta.env.BASE_URL}#/?section=${encodeURIComponent(sectionId)}`;
     setIsMobileMenuOpen(false);
   };
 
@@ -39,9 +45,9 @@ export function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <Link to="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-            <img 
+            <img
               src={`${import.meta.env.BASE_URL}images/logo.png`}
-              alt="Veřejné zakázky 24" 
+              alt="Veřejné zakázky 24"
               className="h-12 sm:h-14 w-auto"
             />
             <div className="flex flex-col">
@@ -63,10 +69,7 @@ export function Navigation() {
               Domů
             </button>
 
-            <Link
-              to="/aktuality"
-              className="text-slate-700 hover:text-slate-900 transition-colors"
-            >
+            <Link to="/aktuality" className="text-slate-700 hover:text-slate-900 transition-colors">
               Aktuality
             </Link>
 
