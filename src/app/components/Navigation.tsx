@@ -15,6 +15,17 @@ export function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // ✅ Klik na logo: vždycky přejde na homepage a posune nahoru (bez 404 a bez potřeby reloadu)
+  const goHome = () => {
+    // přepni na root hash route
+    window.location.hash = '#/';
+
+    // scroll nahoru
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    setIsMobileMenuOpen(false);
+  };
+
   const scrollToSection = (sectionId: string) => {
     // Jsme na homepage (v hash routeru je to pořád pathname "/")
     if (location.pathname === '/') {
@@ -44,7 +55,12 @@ export function Navigation() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          <Link to="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+          {/* ✅ místo Linku používáme button -> když jsi už doma, Link nic neudělá; button vždy provede "goHome" */}
+          <button
+            type="button"
+            onClick={goHome}
+            className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+          >
             <img
               src={`${import.meta.env.BASE_URL}images/logo.png`}
               alt="Veřejné zakázky 24"
@@ -58,7 +74,7 @@ export function Navigation() {
                 Průvodce veřejnými zakázkami
               </span>
             </div>
-          </Link>
+          </button>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
