@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
 export function Navigation() {
@@ -17,7 +17,8 @@ export function Navigation() {
 
   const scrollToSection = (sectionId: string) => {
     if (location.pathname !== '/') {
-      window.location.href = `/#${sectionId}`;
+      // Přesměrování na homepage + anchor (funguje i na GitHub Pages)
+      window.location.href = `${import.meta.env.BASE_URL}#${sectionId}`;
     } else {
       const element = document.getElementById(sectionId);
       if (element) {
@@ -39,7 +40,7 @@ export function Navigation() {
         <div className="flex justify-between items-center h-20">
           <Link to="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
             <img 
-              src="/images/logo.png" 
+              src={`${import.meta.env.BASE_URL}images/logo.png`}
               alt="Veřejné zakázky 24" 
               className="h-12 sm:h-14 w-auto"
             />
@@ -61,30 +62,35 @@ export function Navigation() {
             >
               Domů
             </button>
+
             <Link
               to="/aktuality"
               className="text-slate-700 hover:text-slate-900 transition-colors"
             >
               Aktuality
             </Link>
+
             <button
               onClick={() => scrollToSection('videa')}
               className="text-slate-700 hover:text-slate-900 transition-colors"
             >
               Videa
             </button>
+
             <button
               onClick={() => scrollToSection('o-projektu')}
               className="text-slate-700 hover:text-slate-900 transition-colors"
             >
               O projektu
             </button>
+
             <button
               onClick={() => scrollToSection('o-nas')}
               className="text-slate-700 hover:text-slate-900 transition-colors"
             >
               O nás
             </button>
+
             <button
               onClick={() => scrollToSection('kontakt')}
               className="text-slate-700 hover:text-slate-900 transition-colors"
@@ -112,6 +118,7 @@ export function Navigation() {
               >
                 Domů
               </button>
+
               <Link
                 to="/aktuality"
                 onClick={() => setIsMobileMenuOpen(false)}
@@ -119,24 +126,28 @@ export function Navigation() {
               >
                 Aktuality
               </Link>
+
               <button
                 onClick={() => scrollToSection('videa')}
                 className="text-left px-4 py-2 text-slate-700 hover:bg-slate-50 transition-colors"
               >
                 Videa
               </button>
+
               <button
                 onClick={() => scrollToSection('o-projektu')}
                 className="text-left px-4 py-2 text-slate-700 hover:bg-slate-50 transition-colors"
               >
                 O projektu
               </button>
+
               <button
                 onClick={() => scrollToSection('o-nas')}
                 className="text-left px-4 py-2 text-slate-700 hover:bg-slate-50 transition-colors"
               >
                 O nás
               </button>
+
               <button
                 onClick={() => scrollToSection('kontakt')}
                 className="text-left px-4 py-2 text-slate-700 hover:bg-slate-50 transition-colors"
