@@ -1,0 +1,21 @@
+# robots.txt pro Veřejné zakázky 24
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# Sitemap
+Sitemap: https://www.zakazkovy-pruvodce.cz/sitemap.xml
+
+# Crawl-delay pro všechny boty (volitelné)
+Crawl-delay: 1
+
+# Specifické instrukce pro hlavní boty
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
