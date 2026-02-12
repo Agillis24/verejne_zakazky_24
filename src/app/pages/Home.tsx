@@ -66,7 +66,7 @@ export function Home() {
               <div className="relative">
                 <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
                   <img
-                    src="/images/hero.png"
+                    src={`${import.meta.env.BASE_URL}images/hero.png`}
                     alt="Veřejné zakázky 24"
                     className="w-full h-full object-cover"
                   />
@@ -247,7 +247,7 @@ export function Home() {
               <div className="relative">
                 <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
                   <img
-                    src="/images/why-follow.png"
+                    src={`${import.meta.env.BASE_URL}images/why-follow.png`}
                     alt="Profesionální prostředí"
                     className="w-full h-full object-cover"
                   />
@@ -276,7 +276,7 @@ export function Home() {
                 >
                   <div className="mb-6 inline-block">
                     <img
-                      src="/images/jan-musil.jpg"
+                      src={`${import.meta.env.BASE_URL}images/jan-musil.jpg`}
                       alt="JUDr. Jan Musil, LL.M."
                       className="w-40 h-40 sm:w-48 sm:h-48 rounded-full object-cover mx-auto shadow-xl group-hover:shadow-2xl transition-shadow duration-300 ring-4 ring-slate-100 group-hover:ring-orange-200"
                     />
@@ -301,7 +301,7 @@ export function Home() {
                 >
                   <div className="mb-6 inline-block">
                     <img
-                      src="/images/dominik-zlebek.jpg"
+                      src={`${import.meta.env.BASE_URL}images/dominik-zlebek.jpg`}
                       alt="Ing. Dominik Žlebek, LL.M."
                       className="w-40 h-40 sm:w-48 sm:h-48 rounded-full object-cover mx-auto shadow-xl group-hover:shadow-2xl transition-shadow duration-300 ring-4 ring-slate-100 group-hover:ring-orange-200"
                     />
@@ -408,7 +408,7 @@ export function Home() {
 
                   <div className="h-full min-h-[300px] md:min-h-[400px]">
                     <img
-                      src="/images/tenderix.png"
+                      src={`${import.meta.env.BASE_URL}images/tenderix.png`}
                       alt="TENDERIX - AI platforma"
                       className="w-full h-full object-cover"
                     />
