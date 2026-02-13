@@ -288,7 +288,7 @@ export function Home() {
                   Absolvent Právnické fakulty Univerzity Karlovy. Oblasti veřejných 
                   zakázek se věnuje od působení v Technologické agentuře ČR. V současnosti 
                   působí jako advokát specializovaný na veřejné zakázky v advokátní 
-                  kancel��ři Solkind s.r.o. v Praze.
+                  kanceláři Solkind s.r.o. v Praze.
                 </p>
               </div>
 
@@ -313,7 +313,7 @@ export function Home() {
                   Absolvent Provozně ekonomické fakulty ČZU v Praze. Profesní zkušenosti 
                   v oblasti veřejných zakázek získal v Technologické agentuře ČR a ve 
                   společnosti Technologie hlavního města Prahy. V současnosti působí 
-                  jako konzultant veřejných zakázek v Tender systems.
+                  jako konzultant veřejných zakázek v Tender systems s.r.o.
                 </p>
               </div>
             </div>
